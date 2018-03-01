@@ -112,7 +112,7 @@ public class CustomViewGroup extends ViewGroup {
                     ct = cParams.topMargin;
                     break;
                 case 1:
-                    cl = getWidth() - cWidth - cParams.leftMargin - cParams.rightMargin;
+                    cl = getWidth() - cWidth - cParams.rightMargin;
                     ct = cParams.topMargin;
                     break;
                 case 2:
@@ -120,7 +120,7 @@ public class CustomViewGroup extends ViewGroup {
                     ct = getHeight() - cHeight - cParams.bottomMargin;
                     break;
                 case 3:
-                    cl = getWidth() - cWidth - cParams.leftMargin - cParams.rightMargin;
+                    cl = getWidth() - cWidth - cParams.rightMargin;
                     ct = getHeight() - cHeight - cParams.bottomMargin;
                     break;
             }
