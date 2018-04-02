@@ -5,6 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background"
     tools:context="com.joy.customview.activity.MainActivity">
+
+    <com.joy.customview.view.SlideSwitchH
+        android:layout_width="400dp"
+        android:layout_height="40dp"
+        slideswitch:isOpen="false"
+        slideswitch:shape="circle"
+        slideswitch:themeColor="#f200aa96" />
+
+    <com.joy.customview.view.SlideSwitchV
+        android:layout_width="98dp"
+        android:layout_height="294dp"
+        slideswitch:isOpen="true"
+        slideswitch:shape="circle"
+        slideswitch:themeColor="#7f000000" />
 
 </LinearLayout>
