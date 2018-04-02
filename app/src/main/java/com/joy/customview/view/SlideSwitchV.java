@@ -131,8 +131,11 @@ public class SlideSwitchV extends View {
         return result;
     }
 
+    private int stage = 3;
+
     @Override
     protected void onDraw(Canvas canvas) {
+        Log.e("haha", "onDraw");
         if (shape == SHAPE_RECT) {
             paint.setColor(Color.GRAY);
             canvas.drawRect(backRect, paint);
@@ -158,29 +161,60 @@ public class SlideSwitchV extends View {
             //canvas.drawRoundRect(frontCircleRect, radius, radius, paint);
             canvas.drawCircle(width / 2, frontRect_top + radius + RIM_SIZE, radius, paint);
 
+
             if (drawDir) {
-                paint.setAlpha(85);
-                canvas.drawBitmap(BitmapFactory.decodeResource(
-                        getResources(), R.drawable.shape),
-                        CommonUtils.dp2px(getContext(), 41),
-                        CommonUtils.dp2px(getContext(), 159),
-                        paint);
-                paint.setAlpha(170);
-                canvas.drawBitmap(BitmapFactory.decodeResource(
-                        getResources(), R.drawable.shape),
-                        CommonUtils.dp2px(getContext(), 41),
-                        CommonUtils.dp2px(getContext(), 179),
-                        paint);
-                paint.setAlpha(255);
-                canvas.drawBitmap(BitmapFactory.decodeResource(
-                        getResources(), R.drawable.shape),
-                        CommonUtils.dp2px(getContext(), 41),
-                        CommonUtils.dp2px(getContext(), 199),
-                        paint);
+                switch (stage) {
+                    case 0:
+                        paint.setAlpha(85);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(
+                                getResources(), R.drawable.shape),
+                                CommonUtils.dp2px(getContext(), 41),
+                                CommonUtils.dp2px(getContext(), 159),
+                                paint);
+                        break;
+                    case 1:
+                        paint.setAlpha(85);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(
+                                getResources(), R.drawable.shape),
+                                CommonUtils.dp2px(getContext(), 41),
+                                CommonUtils.dp2px(getContext(), 159),
+                                paint);
+                        paint.setAlpha(170);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(
+                                getResources(), R.drawable.shape),
+                                CommonUtils.dp2px(getContext(), 41),
+                                CommonUtils.dp2px(getContext(), 179),
+                                paint);
+                        break;
+                    case 2:
+                        paint.setAlpha(85);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(
+                                getResources(), R.drawable.shape),
+                                CommonUtils.dp2px(getContext(), 41),
+                                CommonUtils.dp2px(getContext(), 159),
+                                paint);
+                        paint.setAlpha(170);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(
+                                getResources(), R.drawable.shape),
+                                CommonUtils.dp2px(getContext(), 41),
+                                CommonUtils.dp2px(getContext(), 179),
+                                paint);
+                        paint.setAlpha(255);
+                        canvas.drawBitmap(BitmapFactory.decodeResource(
+                                getResources(), R.drawable.shape),
+                                CommonUtils.dp2px(getContext(), 41),
+                                CommonUtils.dp2px(getContext(), 199),
+                                paint);
+                        break;
+                    case 3:
+                        break;
+                    default:
+                        break;
+                }
+                stage = (stage + 1) % 4;
+                postInvalidateDelayed(1000);
             }
-
         }
-
     }
 
     private boolean drawDir = true;
@@ -208,7 +242,6 @@ public class SlideSwitchV extends View {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                drawDir = true;
                 frontRect_top_begin = frontRect_top;
                 boolean toStart;
                 toStart = ((max_top - frontRect_top) < 10) ? false : true;
@@ -257,6 +290,8 @@ public class SlideSwitchV extends View {
                 if (listener != null)
                     listener.open();
                 frontRect_top_begin = min_top;
+                drawDir = true;
+                stage = 0;
             }
         });
     }

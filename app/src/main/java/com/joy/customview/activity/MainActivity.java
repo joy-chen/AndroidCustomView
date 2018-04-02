@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 
         mwindowManager = (WindowManager)
                 getSystemService(Context.WINDOW_SERVICE);
-        createFloatWindow(this);
+        //createFloatWindow(this);
     }
 
     public void createFloatWindow(Context context) {
